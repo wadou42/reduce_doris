@@ -1,0 +1,40 @@
+# for all
+-fno-stack-protector-all
+-fno-stack-protector-explicit
+-fno-stack-protector-strong
+-gstatement-fno-rontiers 
+-fno-no-threadsafe-statics
+-fno-toplevel-reorder -fsection-anchors
+
+-finline-atomics
+-frtti
+-fpack-struct
+-ftracer
+-funroll-completely-grow-size
+-fstrict-enums
+-fsingle-precision-constant
+-fsimdmath
+-freorder-blocks-and-partition
+-fno-unroll-completely-grow-size
+-fsplit-ldp-stp
+-fipa-pta
+-fselective-scheduling2 -fvar-tracking-assignments-toggle
+-fsel-sched-pipelining -fselective-scheduling -fselective-scheduling2
+-fselective-scheduling -fvar-tracking-assignments
+-fselective-scheduling2 -gstatement-frontiers
+-fselective-scheduling -gstatement-frontiers
+-fnothrow-opt
+
+-fno-tree-sra
+-fnon-call-exceptions
+-fno-strict-enums
+-fno-threadsafe-statics
+-fthreadsafe-statics
+-fno-tree-fre
+-fno-tree-forwprop
+-fsignaling-nans -funsafe-math-optimizations
+-fno-tree-dce -fno-tree-dse
+-fno-tree-ch -fno-tree-dominator-opts
+-fno-rtti
+-fno-nothrow-opt
+-fno-non-call-exceptions
