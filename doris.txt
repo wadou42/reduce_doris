@@ -38,3 +38,17 @@
 -fno-rtti
 -fno-nothrow-opt
 -fno-non-call-exceptions
+-fsel-sched-pipelining -fselective-scheduling2 -funroll-loops
+-fno-inline-atomics
+-fno-reg-struct-return
+-fno-inline
+-fno-fold-simple-inlines
+-fno-thread-jumps
+-fno-guess-branch-probability
+-fno-expensive-optimizations
+-fno-exceptions
+-ffold-simple-inlines
+-fno-tree-loop-distribute-patterns -fno-tree-pre
+-fno-tree-dominator-opts -fno-tree-loop-distribute-patterns -fno-tree-partial-pre
+-fno-devirtualize
+-fselective-scheduling2 -ftrapv -funsafe-math-optimizations
