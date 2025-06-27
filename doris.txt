@@ -52,3 +52,5 @@
 -fno-tree-dominator-opts -fno-tree-loop-distribute-patterns -fno-tree-partial-pre
 -fno-devirtualize
 -fselective-scheduling2 -ftrapv -funsafe-math-optimizations
+
+# AUTO-GENERATED CONTENT BELOW
