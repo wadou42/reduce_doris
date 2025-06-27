@@ -114,35 +114,53 @@ sync_process() {
 }
 
 
+
 resolve_conflict() {
     log "检测到冲突，执行智能合并..."
     
-    # 备份当前状态
-    cp "$FILE" "$FILE.bak"
+    # 1. 安全备份（带时间戳）
+    local backup="${FILE}.bak.$(date +%s)"
+    cp "$FILE" "$backup"
     
-    # 提取文件各部分
-    awk -v marker="$MARKER" '
-        BEGIN {print_header=1} 
-        $0 == marker {print_header=0; print; print "# Remote data:"; next}
-        print_header' "$FILE" > "$FILE.header"
-        
-    grep -A 10000 "^$MARKER$" "$FILE" | grep -v "^$MARKER$" > "$FILE.local"
-    grep -A 10000 "^$MARKER$" "$FILE.conflict" | grep -v "^$MARKER$" > "$FILE.remote"
+    # 2. 提取纯净远程数据
+    git show $(git merge-base HEAD MERGE_HEAD):"$FILE" > "$FILE.base"  # 共同祖先版本
+    git show MERGE_HEAD:"$FILE" > "$FILE.remote"  # 远程版本
     
-    # 合并文件
-    cat "$FILE.header" > "$FILE"
-    sort -u "$FILE.local" "$FILE.remote" | grep -v "^#" >> "$FILE"
+    # 3. 分离数据部分（兼容不同换行符）
+    extract_data() {
+        grep -A 100000 "^$MARKER$" "$1" | tail -n +2 | 
+        sed 's/\r$//' | awk '{ $1=$1; print }'  # 标准化格式
+    }
     
-    # 验证合并结果
-    if [ ! -s "$FILE" ]; then
-        log "合并失败，恢复备份"
-        mv "$FILE.bak" "$FILE"
+    local base_data=$(extract_data "$FILE.base")
+    local local_data=$(extract_data "$FILE")
+    local remote_data=$(extract_data "$FILE.remote")
+    
+    # 4. 三向合并（保留所有独特修改）
+    local merged_data=$(echo -e "$base_data\n$local_data\n$remote_data" | 
+        awk '!seen[$0]++'  # 去重且保留顺序
+    )
+    
+    # 5. 重建文件结构
+    {
+        grep -B 100000 "^$MARKER$" "$FILE" | head -n -1  # 保留header
+        echo "$MARKER"
+        echo "$merged_data"
+    } > "$FILE.tmp"
+    
+    # 6. 严格验证
+    if [ -s "$FILE.tmp" ] && 
+       grep -q "^$MARKER$" "$FILE.tmp" && 
+       [ $(wc -l < "$FILE.tmp") -gt $(grep -B 100000 "^$MARKER$" "$FILE" | head -n -1 | wc -l) ]; then
+        mv "$FILE.tmp" "$FILE"
+        log "合并成功: 保留 $(( $(wc -l <<< "$merged_data") )) 行数据"
+        rm -f "$backup" "$FILE.base" "$FILE.remote"
+        return 0
+    else
+        log "合并失败: 文件结构损坏"
+        mv "$backup" "$FILE"
         return 1
     fi
-    
-    log "合并成功，保留所有数据"
-    rm -f "$FILE.header" "$FILE.local" "$FILE.remote" "$FILE.bak"
-    return 0
 }
 
 # 日志和主循环（同前）
