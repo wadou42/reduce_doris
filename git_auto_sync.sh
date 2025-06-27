@@ -4,7 +4,7 @@
 FILE="doris.txt"
 MARKER="# AUTO-GENERATED CONTENT BELOW"
 REPO_DIR=$(pwd)
-SYNC_INTERVAL=100
+SYNC_INTERVAL=111
 LOG_FILE="sync.log"
 BACKUP_DIR="data_backups"
 
@@ -35,8 +35,9 @@ merge_existing_data() {
     local remote_data=$(git show origin/master"$FILE" 2>/dev/null | grep -A 10000 "^$MARKER$" | grep -v "^$MARKER$")
     
     # 合并数据（去重）
-    local merged_data=$(echo -e "$current_data\n$remote_data" | sort -u)
-    
+    # local merged_data=$(echo -e "$current_data\n$remote_data" | sort -u)
+    local merged_data=$(echo -e "$current_data\n$remote_data" | awk '!seen[$0]++')
+
     # 重建文件
     grep -B 10000 "^$MARKER$" "$FILE" | head -n -1 > "$FILE.tmp"
     echo "$MARKER" >> "$FILE.tmp"
