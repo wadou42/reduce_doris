@@ -1,0 +1,30 @@
+sync.log
+
+# 数据备份目录
+data_backups/
+
+# 系统自动生成的文件
+.DS_Store
+*.swp
+*.swo
+
+# 临时文件
+*.tmp
+*.temp
+*.bak
+*.conflict
+
+# 编辑器目录
+.idea/
+.vscode/
+
+# 脚本生成的标记文件
+.synced
+
+# 系统文件
+Thumbs.db
+ehthumbs.db
+
+# 编译产物
+*.pyc
+__pycache__/
