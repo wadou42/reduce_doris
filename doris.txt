@@ -55,7 +55,3 @@
 
 # AUTO-GENERATED CONTENT BELOW
 
-# test on .2
-# test on .147
-# test on .2
-# test on .2
