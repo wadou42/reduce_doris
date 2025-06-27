@@ -54,5 +54,3 @@
 -fselective-scheduling2 -ftrapv -funsafe-math-optimizations
 
 # AUTO-GENERATED CONTENT BELOW
-# haha
-heihei
