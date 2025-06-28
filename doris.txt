@@ -52,11 +52,8 @@
 -fno-tree-dominator-opts -fno-tree-loop-distribute-patterns -fno-tree-partial-pre
 -fno-devirtualize
 -fselective-scheduling2 -ftrapv -funsafe-math-optimizations
-
-# AUTO-GENERATED CONTENT BELOW
-
-<<<<<<< HEAD
-# test on 147
-=======
-# test on .2
->>>>>>> origin/master
+-fdelayed-branch
+-fbranch-probabilities
+-fno-early-inlining
+-fno-ipa-modref -fno-partial-inlining -fno-tree-vrp
+-fno-ipa-pure-const -fno-partial-inlining -fno-tree-vrp
