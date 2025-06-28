@@ -57,3 +57,17 @@
 -fno-early-inlining
 -fno-ipa-modref -fno-partial-inlining -fno-tree-vrp
 -fno-ipa-pure-const -fno-partial-inlining -fno-tree-vrp
+-fselective-scheduling2 -ftrapv -funsafe-math-optimizations -ftree-slp-transpose-vectorize
+-fno-tree-slp-transpose-vectorize
+-ftree-slp-transpose-vectorize
+-floop-crc
+-fselective-scheduling2 -fvar-tracking-assignments
+-fno-loop-crc
+-fselective-scheduling2 -ftrapv -funsafe-math-optimizations
+-fselective-scheduling2 -ftrapv -funsafe-math-optimizations -fno-tree-slp-transpose-vectorize
+-fselective-scheduling -fvar-tracking-assignments-toggle
+-fdelayed-branch
+-fbranch-probabilities
+-fno-early-inlining
+-fno-ipa-modref -fno-partial-inlining -fno-tree-vrp
+-fno-ipa-pure-const -fno-partial-inlining -fno-tree-vrp
