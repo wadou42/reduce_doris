@@ -24,7 +24,6 @@
 -fselective-scheduling2 -gstatement-frontiers
 -fselective-scheduling -gstatement-frontiers
 -fnothrow-opt
-
 -fno-tree-sra
 -fnon-call-exceptions
 -fno-strict-enums
@@ -63,11 +62,5 @@
 -floop-crc
 -fselective-scheduling2 -fvar-tracking-assignments
 -fno-loop-crc
--fselective-scheduling2 -ftrapv -funsafe-math-optimizations
 -fselective-scheduling2 -ftrapv -funsafe-math-optimizations -fno-tree-slp-transpose-vectorize
 -fselective-scheduling -fvar-tracking-assignments-toggle
--fdelayed-branch
--fbranch-probabilities
--fno-early-inlining
--fno-ipa-modref -fno-partial-inlining -fno-tree-vrp
--fno-ipa-pure-const -fno-partial-inlining -fno-tree-vrp
